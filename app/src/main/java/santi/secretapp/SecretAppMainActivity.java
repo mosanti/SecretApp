@@ -18,19 +18,18 @@ import android.view.ViewGroup;
 public class SecretAppMainActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
+    android.support.v7.app.ActionBar mActionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_secret_app_main);
-        android.support.v7.app.ActionBar mActionBar = getSupportActionBar();
-        if (mActionBar != null) {
-            mActionBar.setDisplayHomeAsUpEnabled(true);
-            mActionBar.setHomeAsUpIndicator(R.drawable.ic_actionbar_slidemenu);
-            //mActionBar.setDisplayShowHomeEnabled(false);
-        }
+        mActionBar = getSupportActionBar();
+        mActionBar.setDisplayHomeAsUpEnabled(true);
+        mActionBar.setHomeAsUpIndicator(R.drawable.ic_actionbar_slidemenu);
         final DrawerArrowDrawable indicator = new DrawerArrowDrawable(this);
-        indicator.setColor(Color.BLACK);
+        indicator.setColor(Color.WHITE);
+        mActionBar.setDisplayShowHomeEnabled(false);
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         drawerLayout.setScrimColor(Color.TRANSPARENT);
@@ -75,8 +74,10 @@ public class SecretAppMainActivity extends AppCompatActivity {
             case android.R.id.home:
                 if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
                     drawerLayout.closeDrawer(GravityCompat.START);
+                    mActionBar.setHomeAsUpIndicator(R.drawable.ic_actionbar_slidemenu);
                 } else {
                     drawerLayout.openDrawer(GravityCompat.START);
+                    mActionBar.setHomeAsUpIndicator(R.drawable.ic_actionbar_back);
                 }
                 break;
             case R.id.action_settings:
