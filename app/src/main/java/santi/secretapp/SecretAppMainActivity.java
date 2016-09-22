@@ -1,5 +1,6 @@
 package santi.secretapp;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -11,14 +12,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.support.v7.app.ActionBar;
 
 import android.support.v4.widget.DrawerLayout;
 import android.view.ViewGroup;
+import santi.secretapp.view.SettingsActivity;
 
 public class SecretAppMainActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
-    android.support.v7.app.ActionBar mActionBar;
+    private ActionBar mActionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +36,8 @@ public class SecretAppMainActivity extends AppCompatActivity {
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         drawerLayout.setScrimColor(Color.TRANSPARENT);
-        drawerLayout.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
+        //drawerLayout.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
+        drawerLayout.setDrawerListener(new DrawerLayout.SimpleDrawerListener() {
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
                 if (((ViewGroup) drawerView).getChildAt(1).getId() == R.id.leftSideBar) {
@@ -81,6 +85,8 @@ public class SecretAppMainActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.action_settings:
+                Intent settingsIntent = new Intent(this,SettingsActivity.class);
+                startActivity(settingsIntent);
                 break;
             default:
                 break;
