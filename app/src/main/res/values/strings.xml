@@ -180,8 +180,8 @@
     <string name="filter_blue">蓝色</string>
     <string name="filter_notification_content">点击调整滤镜颜色</string>
 
-    <string name="text_empty_app_view_slogon">把不常使用的应用进行冷藏！</string>
-    <string name="text_start_disabled_app">立刻开启冷藏功能</string>
+    <string name="text_empty_app_view_slogon">冷藏使用率低的应用，减少内存消耗！</string>
+    <string name="text_start_disabled_app">启动冷藏</string>
     <string name="text_disabled_app">应用冷藏室</string>
 
     <string name="progress_dialog_title">"加载中......"</string>
@@ -252,7 +252,9 @@
     <string name="send_email">发送验证码</string>
     <string name="send_email_success">验证码已经发送到您的邮箱</string>
     <string name="send_email_error">邮件发送出错</string>
-    <string name="share_text">智能应用管家(SmartAppManager)，该应用具备应用锁，系统锁，图片视频锁，应用冷藏，护眼模式，信息语音播报等功能,可以帮助手机上锁，守住隐私，优化系统,为您的系统保驾护航。可以通过以下链接下载并安装，"https://www.tclmobile.com/SmartAppManager.apk"</string>
+    <string name="share_text">密隐APP(SecretApp)，该应用具备应用锁，系统锁，图片视频锁，应用冷藏，护眼模式，信息语音播报等功能,可以帮助手机上锁，守住隐私，优化系统,为您的系统保驾护航。可以通过以下链接下载并安装.\n<u>"https://www.xxxxxx.com/SecretApp.apk"</u></string>
+    <string name="contact_num"><u>联系电话：0752-8228xxx</u></string>contact_email
+    <string name="contact_email"><u>邮箱地址：xxxxxx.xx@tcl.com</u></string>
     <string name="share_subject">应用管家分享</string>
     <string name="share_title">  分享内容：</string>
     <string name="share_app_title">邀请好友</string>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/empty_disabled_app_Layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/disabled_app_iamge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="80dp"
+            android:background="@drawable/ic_launcher"/>
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="61dp"
+            android:gravity="center"
+            android:textSize="14dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@android:color/holo_red_dark"
+            android:text="@string/text_empty_app_view_slogon"
+            android:layout_gravity="center_horizontal" />
+
+        <Button
+            android:id="@+id/btn_start_disabled_app"
+            android:layout_width="162dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/btn_start_selector"
+            android:text="@string/text_start_disabled_app"
+            android:layout_gravity="center_horizontal" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -18,9 +18,37 @@
         </activity>
 
         <activity
+            android:name=".view.DisabledAppsActivity"
+            android:label="@string/hide_apps"
+            android:theme="@style/ActionBarTheme"/>
+        <activity
             android:name=".view.SettingsActivity"
             android:label="@string/action_settings"
-            android:theme="@style/SettingsTheme"/>
+            android:theme="@style/ActionBarTheme"/>
+        <activity
+            android:name=".view.AboutAppActivity"
+            android:label="@string/contact_author"
+            android:theme="@style/ActionBarTheme"/>
+        <activity
+            android:name=".view.FeedbackActivity"
+            android:excludeFromRecents="true"
+            android:label="@string/support_advise"
+            android:screenOrientation="portrait"
+            android:theme="@style/ActionBarTheme"
+            android:windowSoftInputMode="adjustResize"/>
+
+        <activity
+            android:name=".view.AppsListActivity"
+            android:label="@string/hide_apps"
+            android:theme="@style/ActionBarTheme"/>
+
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="573dcc1d67e58eb678001788" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="Umeng"/>
     </application>
 
 </manifest>
