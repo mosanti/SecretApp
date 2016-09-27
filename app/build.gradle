@@ -29,7 +29,7 @@ dependencies {
     //testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:design:23.0.0'
-    compile 'com.github.mzule.fantasyslide:library:1.0.4'
+    //compile 'com.github.mzule.fantasyslide:library:1.0.4'
     compile files('libs/com.umeng.fb.5.4.0.jar')
-    //compile(name: 'library-debug', ext: 'aar')
+    compile(name: 'library-debug', ext: 'aar')
 }

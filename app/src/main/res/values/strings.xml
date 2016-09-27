@@ -187,7 +187,7 @@
     <string name="progress_dialog_title">"加载中......"</string>
     <string name="progress_dialog_message">"请稍等"</string>
 
-    <string name="personal_apps_title">"安装应用"</string>
+    <string name="personal_apps_title">"自装应用"</string>
     <string name="system_apps_title">"系统应用"</string>
     <string name="enable_app">"解冻应用"</string>
     <string name="app_info">"应用信息"</string>
