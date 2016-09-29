@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -101,12 +102,43 @@ public class AppsListActivity extends Activity {
         Log.i(TAG, "initUiComponents()");
 
         // Initialize personal app list view
-        ListView mPersonalAppListView = (ListView) findViewById(R.id.list_personal_app);
+        final ListView mPersonalAppListView = (ListView) findViewById(R.id.list_personal_app);
         mPersonalAppAdapter = new AppListAdapter();
         mPersonalAppListView.setAdapter(mPersonalAppAdapter);
         mPersonalAppListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Log.i(TAG,"Personal App onItemClick position is  : " + position);
+                if(position < mPersonalAppList.size()) {
+                    Map<String,Object> item = mPersonalAppList.get(position);
+                    String pkgName = (String) item.get(VIEW_ITEM_PACKAGE_NAME);
+                    boolean isDisabled = (boolean) item.get(VIEW_ITEM_CHECKBOX);
+                    if(!isDisabled) {
+                        try {
+                            mPM.setApplicationEnabledSetting(pkgName, PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER, 0);
+                            item.remove(VIEW_ITEM_CHECKBOX);
+                            item.put(VIEW_ITEM_CHECKBOX, !isDisabled);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Toast.makeText(mContext, R.string.disable_app_permission_tips, Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        try {
+                            mPM.setApplicationEnabledSetting(pkgName, PackageManager.COMPONENT_ENABLED_STATE_DEFAULT, 0);   //恢复为缺省值
+                            item.remove(VIEW_ITEM_CHECKBOX);
+                            item.put(VIEW_ITEM_CHECKBOX, !isDisabled);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Toast.makeText(mContext, R.string.disable_app_permission_tips, Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    if(isPersonalAppTabSelected()) {
+                        mPersonalAppAdapter.notifyDataSetChanged();
+                    } else {
+                        mSystemAppAdapter.notifyDataSetChanged();
+                    }
+                }
 
             }
         });
@@ -117,8 +149,38 @@ public class AppsListActivity extends Activity {
         mSystemAppListView.setAdapter(mSystemAppAdapter);
         mSystemAppListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Log.i(TAG,"Personal App onItemClick position is  : " + position);
+                if(position < mSystemAppList.size()) {
+                    Map<String,Object> item = mSystemAppList.get(position);
+                    String pkgName = (String) item.get(VIEW_ITEM_PACKAGE_NAME);
+                    boolean isDisabled = (boolean) item.get(VIEW_ITEM_CHECKBOX);
+                    if(!isDisabled) {
+                        try {
+                            mPM.setApplicationEnabledSetting(pkgName, PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER, 0);
+                            item.remove(VIEW_ITEM_CHECKBOX);
+                            item.put(VIEW_ITEM_CHECKBOX, !isDisabled);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Toast.makeText(mContext, R.string.disable_app_permission_tips, Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        try {
+                            mPM.setApplicationEnabledSetting(pkgName, PackageManager.COMPONENT_ENABLED_STATE_DEFAULT, 0);   //恢复为缺省值
+                            item.remove(VIEW_ITEM_CHECKBOX);
+                            item.put(VIEW_ITEM_CHECKBOX, !isDisabled);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Toast.makeText(mContext, R.string.disable_app_permission_tips, Toast.LENGTH_LONG).show();
+                        }
+                    }
 
+                    if(isPersonalAppTabSelected()) {
+                        mPersonalAppAdapter.notifyDataSetChanged();
+                    } else {
+                        mSystemAppAdapter.notifyDataSetChanged();
+                    }
+                }
             }
         });
     }
@@ -221,7 +283,6 @@ public class AppsListActivity extends Activity {
                     packageItem.put(VIEW_ITEM_PACKAGE_NAME,packageInfo.packageName);
 
                     // Add if app is disabled.
-                    // Add if app is disabled.
                     boolean isDisabled = !appInfo.enabled;
                     packageItem.put(VIEW_ITEM_CHECKBOX, isDisabled);
 
@@ -236,6 +297,54 @@ public class AppsListActivity extends Activity {
                         mSystemAppList.add(packageItem);
                     } else {
                         mPersonalAppList.add(packageItem);
+                    }
+                }
+            }
+
+            getAllDisabledAppsFromAppList();
+        }
+
+        private void getAllDisabledAppsFromAppList() {
+            List<ApplicationInfo> appInfoList = getPackageManager().
+                    getInstalledApplications(PackageManager.GET_UNINSTALLED_PACKAGES);
+
+            for(ApplicationInfo applicationInfo : appInfoList) {
+                if(!applicationInfo.enabled) {
+                    PackageInfo packageInfo = null;
+
+                    try {
+                        packageInfo = getPackageManager().getPackageInfo(applicationInfo.packageName,0);
+                    } catch (PackageManager.NameNotFoundException e) {
+                        e.printStackTrace();
+                    }
+
+                    if(packageInfo != null) {
+                        Map<String,Object> packageItem =new  HashMap<String,Object>();
+
+                        Drawable pkgIcon = mContext.getPackageManager()
+                                .getApplicationIcon(packageInfo.applicationInfo);
+                        packageItem.put(VIEW_ITEM_ICON,pkgIcon);
+
+                        String pkgName = mContext.getPackageManager()
+                                .getApplicationLabel(packageInfo.applicationInfo).toString();
+                        packageItem.put(VIEW_ITEM_TEXT,pkgName);
+
+                        packageItem.put(VIEW_ITEM_PACKAGE_NAME,packageInfo.packageName);
+
+                        // Add if app is disabled.
+                        packageItem.put(VIEW_ITEM_CHECKBOX, true);
+
+                        // Add to package list
+                        boolean isSystemApp = false;
+                        if (((packageInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0)
+                                || ((packageInfo.applicationInfo.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0)) {
+                            isSystemApp = true;
+                        }
+                        if (isSystemApp) {
+                            mSystemAppList.add(packageItem);
+                        } else {
+                            mPersonalAppList.add(packageItem);
+                        }
                     }
                 }
             }

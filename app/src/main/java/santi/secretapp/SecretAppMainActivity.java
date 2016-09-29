@@ -49,13 +49,24 @@ public class SecretAppMainActivity extends AppCompatActivity {
         drawerLayout.setScrimColor(Color.TRANSPARENT);
         drawerLayout.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
             @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                mActionBar.setHomeAsUpIndicator(R.drawable.ic_actionbar_back);
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+                mActionBar.setHomeAsUpIndicator(R.drawable.ic_actionbar_slidemenu);
+            }
+
+            @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
                 if (((ViewGroup) drawerView).getChildAt(1).getId() == R.id.leftSideBar) {
                     indicator.setProgress(slideOffset);
                 }
             }
         });
-
     }
 
     @Override

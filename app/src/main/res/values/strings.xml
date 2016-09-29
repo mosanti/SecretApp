@@ -12,10 +12,11 @@
     <string name="app_lock">应用锁</string>
     <string name="system_lock">系统锁</string>
     <string name="pics_video_lock">图片视频锁</string>
-    <string name="hide_apps">应用冷藏室</string>
+    <string name="hide_apps">应用冷藏</string>
     <string name="protect_eye">护眼模式</string>
     <string name="message_tts">语音播报</string>
     <string name="settings">设置</string>
+    <string name="share">分享</string>
     <string name="user_center">用户中心</string>
     <string name="user_email">zhibin.zhong@tcl.com</string>
     <string name="exit_app_tip">再按一次退出程序</string>
@@ -182,7 +183,7 @@
 
     <string name="text_empty_app_view_slogon">冷藏使用率低的应用，减少内存消耗！</string>
     <string name="text_start_disabled_app">启动冷藏</string>
-    <string name="text_disabled_app">应用冷藏室</string>
+    <string name="text_disabled_app">应用冷藏</string>
 
     <string name="progress_dialog_title">"加载中......"</string>
     <string name="progress_dialog_message">"请稍等"</string>
